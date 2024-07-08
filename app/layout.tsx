@@ -28,7 +28,20 @@ export const metadata: Metadata = {
       'Discover a new way to manage your freelance and business operations with Aulli. Our all-in-one platform streamlines contracts, payments, invoicing, project management, and client relations, providing everything you need to excel. Join Aulli and transform how you deliver value.',
   },
   icons: {
-    icon: './favicon.ico',
+    icon: [
+      {
+        url: './favicon.ico',
+        media: '(prefers-color-scheme:dark)',
+        type: 'image/x-icon',
+        rel: 'icon',
+      },
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        url: './favicon-light.ico',
+        media: '(prefers-color-scheme:light)',
+      },
+    ],
     apple: [
       {
         rel: 'apple-touch-icon',
