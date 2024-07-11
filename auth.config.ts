@@ -1,9 +1,12 @@
+import { eq } from 'drizzle-orm';
 import NextAuth from 'next-auth';
 import type { NextAuthConfig } from 'next-auth';
 import Google from 'next-auth/providers/google';
 import Nodemailer from 'next-auth/providers/nodemailer';
+import { users } from '~database/models/users';
 import drizzle from '~drizzle';
 import env from '~env';
+import { User } from '~types';
 import { sendVerificationRequest } from '~utils/auth/magic-links';
 
 export default {
@@ -37,13 +40,28 @@ export default {
       return baseUrl;
     },
     async signIn({ user, account, profile, email, credentials }) {
+      if (user) {
+        const existingUser = await drizzle
+          .select()
+          .from(users)
+          .where(eq(users.email, user?.email!));
+
+        if (existingUser) {
+          return true;
+        }
+      }
       return true;
     },
     authorized({ request, auth }) {
       const { pathname } = request.nextUrl;
-      const protectedRoutes = ['/middlewareProtected']; // specify routes you want to protect in this array
-      if (protectedRoutes.includes(pathname)) return !!auth;
+      const openRoutes = ['/get-started']; // specify routes you want to protect in this array
+      if (!openRoutes.includes(pathname)) return !!auth;
       return true;
     },
+  },
+  pages: {
+    signIn: '/auth/get-started',
+    newUser: '/auth/get-started',
+    verifyRequest: '/auth/get-started?verify-request',
   },
 } satisfies NextAuthConfig;
