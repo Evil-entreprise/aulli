@@ -1,21 +1,13 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import { GeistMono } from 'geist/font/mono';
 
 export const viewport: Viewport = {
   themeColor: '#47C826',
   width: 'device-width',
   initialScale: 1,
 };
-
-const geistSans = localFont({
-  src: '../fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-});
-const geistMono = localFont({
-  src: '../fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-});
 
 export const metadata: Metadata = {
   title: 'Aulli - The Ultimate Hub for Freelancers and SMBs',
@@ -59,9 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
+      <body className={`${GeistMono.className}`}>{children}</body>
     </html>
   );
 }
