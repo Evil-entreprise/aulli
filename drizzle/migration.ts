@@ -3,13 +3,13 @@ import postgres from 'postgres';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import env from '~env';
 
-const migrationClient = postgres(env['AUTH_DRIZZLE_URL']!, {
+const migrationClient = postgres(env.DATABASE_URL!, {
   max: 1,
   ssl: 'allow',
 });
 
 await migrate(drizzle(migrationClient), {
-  migrationsFolder: '../database/migrations',
+  migrationsFolder: './migrations',
 });
 
 await migrationClient.end();

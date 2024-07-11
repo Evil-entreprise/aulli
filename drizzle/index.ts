@@ -3,7 +3,7 @@ import * as schema from './schema';
 import postgres from 'postgres';
 import env from '~env';
 
-const client = postgres(env['AUTH_DRIZZLE_URL']!);
+const client = postgres(env.DATABASE_URL);
 const drizzle = drizzle_orm(client, {
   schema,
 });
