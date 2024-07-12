@@ -1,5 +1,5 @@
 import { createTransport } from 'nodemailer';
-import html, { MagicLinkEmail } from '~emails/auth/magic-link';
+import { MagicLinkEmail } from '~emails/magic-link';
 import { Resend } from 'resend';
 import type { Theme } from '@auth/core/types';
 import { EmailConfig } from 'next-auth/providers';
