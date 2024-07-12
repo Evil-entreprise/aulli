@@ -1,25 +1,35 @@
 import { createTransport } from 'nodemailer';
-import html from '~emails/auth/magic-link';
+import html, { MagicLinkEmail } from '~emails/auth/magic-link';
+import { Resend } from 'resend';
+import type { Theme } from '@auth/core/types';
+import { EmailConfig } from 'next-auth/providers';
 
+const resend = new Resend(process.env.AUTH_RESEND_KEY!);
 export async function sendVerificationRequest(params: {
-  identifier: any;
-  url: any;
-  provider: any;
-}) {
+  identifier: string;
+  url: string;
+  provider: EmailConfig;
+  token: string;
+  theme: Theme;
+  request: Request;
+}): Promise<any> {
   const { identifier, url, provider } = params;
   const { host } = new URL(url);
   // NOTE: You are not required to use `nodemailer`, use whatever you want.
-  const transport = createTransport(provider.server);
-  const result = await transport.sendMail({
-    to: identifier,
-    from: provider.from,
-    subject: `Sign in to ${host}`,
-    text: text({ url, host }),
-    html: html({ url, host }),
-  });
-  const failed = result.rejected.concat(result.pending).filter(Boolean);
-  if (failed.length) {
-    throw new Error(`Email(s) (${failed.join(', ')}) could not be sent`);
+
+  try {
+    const result = await resend.emails.send({
+      to: identifier,
+      from: provider.from,
+      subject: `Sign in to ${host}`,
+      text: text({ url, host }),
+      react: MagicLinkEmail({ url, host }),
+    });
+
+    return { success: true, result };
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to send the verification Email.');
   }
 }
 
