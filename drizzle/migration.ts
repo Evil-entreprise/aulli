@@ -5,7 +5,6 @@ import env from '~env';
 
 const migrationClient = postgres(env.DATABASE_URL!, {
   max: 1,
-  ssl: 'allow',
 });
 
 await migrate(drizzle(migrationClient), {
