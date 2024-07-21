@@ -15,21 +15,21 @@ export async function sendVerificationRequest(params: {
 }): Promise<any> {
   const { identifier, url, provider } = params;
   const { host } = new URL(url);
-  // NOTE: You are not required to use `nodemailer`, use whatever you want.
+  console.log('Sending verification email to:', identifier);
+  console.log('Verification URL:', url);
 
   try {
     const result = await resend.emails.send({
       to: identifier,
-      from: provider.from,
+      from: 'onboard@resend.dev',
       subject: `Sign in to ${host}`,
       text: text({ url, host }),
       react: MagicLinkEmail({ url, host }),
     });
-
+    console.log(result);
     return { success: true, result };
   } catch (error) {
     console.error(error);
-    throw new Error('Failed to send the verification Email.');
   }
 }
 
