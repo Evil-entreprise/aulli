@@ -4,6 +4,6 @@ import { signIn } from '~auth';
 export default async function GoogleAuthAction() {
   await signIn('google',{
     redirect:true,
-    redirectTo:'/',
+    redirectTo: '/auth/verify-request'
   });
 }
