@@ -1,6 +1,10 @@
 import React from 'react';
-import env from '~env';
+import Auth from '~components/ui/auth';
 
 export default function page() {
-  return <div>page</div>;
+  return (
+    <div className=''>
+      <Auth />
+    </div>
+  );
 }

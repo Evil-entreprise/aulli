@@ -1,7 +1,14 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import { GeistMono } from 'geist/font/mono';
+import {Inter} from 'next/font/google'
+import UIProvider from '~providers/next-ui-provider';
+import ProviderTree from '~providers';
+import { Toaster } from 'sonner'
+
+import { gilroy, inter } from '~fonts';
+
+
 
 export const viewport: Viewport = {
   themeColor: '#47C826',
@@ -51,7 +58,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${GeistMono.className}`}>{children}</body>
+      <body
+        className={`${gilroy.variable} ${inter.variable} h-dvh w-dvw lima-theme text-foreground bg-background text-antialiased`}
+      >
+        
+        <Toaster position="bottom-right"/>
+        <ProviderTree>
+          <>{children}</>
+        </ProviderTree>
+      </body>
     </html>
   );
 }
