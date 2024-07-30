@@ -21,12 +21,11 @@ export async function sendVerificationRequest(params: {
   try {
     const result = await resend.emails.send({
       to: identifier,
-      from: 'onboard@resend.dev',
-      subject: `Sign in to ${host}`,
+      from: process.env.EMAIL_FROM!,
+      subject: `Sign in to Aulli`,
       text: text({ url, host }),
       react: MagicLinkEmail({ url, host }),
     });
-    console.log(result);
     return { success: true, result };
   } catch (error) {
     console.error(error);
