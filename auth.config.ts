@@ -6,12 +6,18 @@ import Resend from 'next-auth/providers/resend';
 import { sendVerificationRequest } from '~utils/auth/magic-links';
 
 export default {
+  session: {
+    strategy: 'database',
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
+  },
   providers: [
     Google({
       clientId: process.env.AUTH_GOOGLE_ID!,
       clientSecret: process.env.AUTH_GOOGLE_SECRET!,
     }),
     Resend({
+      maxAge: 10 * 60,
       apiKey: process.env.AUTH_RESEND_KEY!,
       from: process.env.EMAIL_FROM!,
       sendVerificationRequest,
