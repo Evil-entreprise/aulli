@@ -10,10 +10,7 @@ export default function ProviderTree({
   return (
     <main>
       <SessionProvider>
-        <UIProvider>
-          
-          {children}
-        </UIProvider>
+        <UIProvider>{children}</UIProvider>
       </SessionProvider>
     </main>
   );
