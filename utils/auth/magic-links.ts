@@ -2,12 +2,8 @@ import { MagicLinkEmail } from '~emails/magic-link';
 import { Resend } from 'resend';
 import type { Theme } from '@auth/core/types';
 import { EmailConfig } from 'next-auth/providers';
-import { renderAsync } from '@react-email/components';
-
-export const runtime = 'edge';
 
 const resend = new Resend(process.env.AUTH_RESEND_KEY!);
-
 export async function sendVerificationRequest(params: {
   identifier: string;
   url: string;
@@ -25,7 +21,7 @@ export async function sendVerificationRequest(params: {
       from: process.env.EMAIL_FROM!,
       subject: `Sign in to Aulli`,
       text: text({ url, host }),
-      html: await renderAsync(MagicLinkEmail({ url, host })),
+      react: MagicLinkEmail({ url, host }),
     });
     return { success: true, result };
   } catch (error) {
@@ -36,3 +32,5 @@ export async function sendVerificationRequest(params: {
 function text({ url, host }: { url: string; host: string }) {
   return `Sign in to ${host}\n${url}\n\n`;
 }
+
+//TODO: use resend
