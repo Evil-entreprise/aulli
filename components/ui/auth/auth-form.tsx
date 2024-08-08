@@ -46,7 +46,7 @@ export default function Component() {
   );
 
   return (
-    <div className='flex h-full flex-col w-80 items-center justify-center p-4'>
+    <div className='flex h-full flex-col w-96 items-center justify-center p-4'>
       <div className='flex flex-col items-center pb-1 space-y-3'>
         <AulliWordMark />
         <div className={'text-center'}>
