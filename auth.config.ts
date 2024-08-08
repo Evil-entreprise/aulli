@@ -1,9 +1,7 @@
-import { DrizzleAdapter } from '@auth/drizzle-adapter';
-import { eq } from 'drizzle-orm';
 import type { NextAuthConfig } from 'next-auth';
 import Google from 'next-auth/providers/google';
 import Resend from 'next-auth/providers/resend';
-import { sendVerificationRequest } from '~utils/auth/magic-links';
+import { sendVerificationRequest } from '~lib/auth';
 
 export default {
   session: {
