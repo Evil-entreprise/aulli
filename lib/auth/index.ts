@@ -1,1 +1,1 @@
-export { sendVerificationRequest } from './magic-links';
+export { sendVerificationRequest } from './magic-link';
