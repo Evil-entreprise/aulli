@@ -59,7 +59,7 @@ export default function RootLayout({
       >
         <Toaster position='bottom-right' />
         <ProviderTree>
-          <>{children}</>
+          <main>{children}</main>
           {shouldInjectToolbar && <VercelToolbar />}
         </ProviderTree>
       </body>
