@@ -19,6 +19,7 @@
     "@nextui-org/react": "^2.4.6",
     "@react-email/components": "^0.0.21",
     "@t3-oss/env-nextjs": "^0.10.1",
+    "@vercel/toolbar": "^0.1.15",
     "clsx": "^2.1.1",
     "drizzle-orm": "0.31.2",
     "framer-motion": "^11.3.23",
