@@ -2,8 +2,11 @@ import type { NextAuthConfig } from 'next-auth';
 import Google from 'next-auth/providers/google';
 import Resend from 'next-auth/providers/resend';
 import { sendVerificationRequest } from '~lib/auth';
+import { DrizzleAdapter } from '@auth/drizzle-adapter';
+import drizzle from '~drizzle';
 
 export default {
+  adapter: DrizzleAdapter(drizzle),
   providers: [
     Google({
       clientId: process.env.AUTH_GOOGLE_ID!,
