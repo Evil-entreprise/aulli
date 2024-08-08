@@ -9,7 +9,11 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  debug: true,
   adapter: DrizzleAdapter(drizzle),
+  session: {
+    strategy: 'database',
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
+  },
   ...config,
 });
