@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import ProviderTree from '~providers';
 import { Toaster } from 'sonner';
 import { gilroy, inter } from '~fonts';
+import { VercelToolbar } from '@vercel/toolbar/next';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -50,6 +51,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const shouldInjectToolbar = process.env.NODE_ENV === 'development';
   return (
     <html lang='en'>
       <body
@@ -58,6 +60,7 @@ export default function RootLayout({
         <Toaster position='bottom-right' />
         <ProviderTree>
           <>{children}</>
+          {shouldInjectToolbar && <VercelToolbar />}
         </ProviderTree>
       </body>
     </html>
