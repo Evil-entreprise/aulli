@@ -4,11 +4,6 @@ import Resend from 'next-auth/providers/resend';
 import { sendVerificationRequest } from '~lib/auth';
 
 export default {
-  session: {
-    strategy: 'database',
-    maxAge: 30 * 24 * 60 * 60,
-    updateAge: 24 * 60 * 60,
-  },
   providers: [
     Google({
       clientId: process.env.AUTH_GOOGLE_ID!,
